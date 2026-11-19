@@ -5,539 +5,742 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CASE 001 — THE OBSERVATION TEST</title>
+
 <style>
 :root {
   --red: #B51220;
-  --bg: #070707;
+  --bg: #080808;
   --card: #151515;
-  --text: #f3f0e9;
+  --text: #f5f5f5;
   --muted: #999;
 }
-* { box-sizing: border-box; }
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  background: var(--bg);
+  min-height: 100vh;
+  padding: 25px 15px;
+  background: radial-gradient(circle at top, #241012, #080808 55%);
   color: var(--text);
   font-family: Arial, sans-serif;
-  min-height: 100vh;
+  display: flex;
+  justify-content: center;
 }
+
 .container {
-  width: min(760px, 92%);
-  margin: auto;
-  padding: 35px 0 55px;
+  width: 100%;
+  max-width: 650px;
 }
+
 .top {
   display: flex;
   justify-content: space-between;
-  color: var(--muted);
+  color: var(--red);
   font-family: monospace;
   font-size: 11px;
   letter-spacing: 2px;
-  border-bottom: 1px solid #292929;
+  border-bottom: 1px solid #333;
   padding-bottom: 15px;
 }
-.red { color: var(--red); }
+
 h1 {
-  font-size: clamp(32px, 7vw, 56px);
-  line-height: 1;
-  letter-spacing: -2px;
-  margin: 35px 0 15px;
+  font-size: clamp(35px, 8vw, 58px);
+  line-height: 1.05;
+  margin: 35px 0 12px;
 }
+
+h2 {
+  font-size: 23px;
+  line-height: 1.3;
+}
+
 .subtitle {
-  color: var(--muted);
+  color: #aaa;
   line-height: 1.7;
-  font-size: 14px;
 }
+
 .panel {
-  background: var(--card);
-  border: 1px solid #292929;
+  background: rgba(21,21,21,.96);
+  border: 1px solid #333;
+  border-radius: 12px;
   padding: 24px;
   margin-top: 25px;
 }
-h2 {
-  font-size: 18px;
-  letter-spacing: 1px;
-  margin-top: 0;
-}
-.steps {
-  display: grid;
-  gap: 17px;
-  margin-top: 25px;
-}
-.step {
-  display: flex;
-  gap: 15px;
-  line-height: 1.5;
-  font-size: 14px;
-}
-.num {
+
+.label {
   color: var(--red);
   font-family: monospace;
-  font-size: 17px;
-  font-weight: bold;
+  font-size: 11px;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
 }
+
+.instructions {
+  color: #ccc;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.instructions strong {
+  color: white;
+}
+
+.rule {
+  border-top: 1px solid #333;
+  margin: 20px 0;
+}
+
 button {
-  border: 0;
+  width: 100%;
+  padding: 15px;
+  margin-top: 15px;
   background: var(--red);
   color: white;
-  padding: 15px 22px;
+  border: none;
+  border-radius: 6px;
   font-weight: bold;
   letter-spacing: 1px;
   cursor: pointer;
-  width: 100%;
-  margin-top: 22px;
-  font-size: 13px;
+  font-size: 14px;
 }
-button:hover { background: #d0192a; }
+
+button:hover {
+  background: #d01929;
+}
+
 button.secondary {
   background: #252525;
   border: 1px solid #444;
 }
-.small {
-  font-size: 11px;
-  color: var(--muted);
-  line-height: 1.6;
+
+.hidden {
+  display: none !important;
 }
-.hidden { display: none !important; }
-.timer {
-  font-family: monospace;
+
+.countdown {
+  font-size: 42px;
   color: var(--red);
-  font-size: 30px;
-  font-weight: bold;
+  font-family: monospace;
   text-align: center;
   margin: 15px 0;
 }
-.scene {
+
+.grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 9px;
   margin-top: 20px;
 }
+
 .object {
-  min-height: 105px;
-  background: #202020;
-  border: 1px solid #373737;
+  background: #090909;
+  border: 1px solid #333;
+  border-radius: 9px;
+  min-height: 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 9px;
-}
-.object .emoji { font-size: 30px; }
-.object .name {
-  font-size: 10px;
-  color: #bbb;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-.question {
-  border-bottom: 1px solid #292929;
-  padding: 18px 0;
-}
-.question h3 {
-  font-size: 15px;
-  line-height: 1.5;
-  margin: 0 0 12px;
-}
-.options {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: 8px;
 }
-.option {
-  background: #202020;
-  border: 1px solid #393939;
-  padding: 12px;
-  font-size: 13px;
-  cursor: pointer;
-  line-height: 1.4;
+
+.emoji {
+  font-size: 30px;
 }
-.option.selected {
-  border-color: var(--red);
-  background: #351116;
+
+.object-name {
+  font-size: 11px;
+  color: #aaa;
 }
-.option.correct {
-  border-color: #39885a;
-  background: #10251a;
+
+.progress-wrap {
+  height: 5px;
+  background: #292929;
+  border-radius: 10px;
+  margin: 15px 0 25px;
+  overflow: hidden;
 }
-.option.wrong {
-  border-color: var(--red);
-  background: #351116;
+
+.progress {
+  height: 100%;
+  background: var(--red);
+  width: 0%;
+  transition: width .3s;
 }
-.result {
-  text-align: center;
-  padding: 30px 10px;
-}
-.score {
-  font-size: 54px;
-  font-weight: bold;
-  margin: 15px 0;
-}
-.code {
-  font-family: monospace;
-  font-size: 35px;
-  letter-spacing: 9px;
+
+.question-number {
   color: var(--red);
-  background: #1b1b1b;
-  border: 1px dashed #555;
-  padding: 20px;
+  font-family: monospace;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+.question {
+  font-size: 19px;
+  line-height: 1.6;
   margin: 20px 0;
 }
-@media(max-width:480px) {
-  .scene { gap: 6px; }
-  .object { min-height: 85px; }
-  .object .emoji { font-size: 25px; }
-  .options { grid-template-columns: 1fr; }
+
+.options {
+  display: grid;
+  gap: 10px;
+}
+
+.option {
+  background: #090909;
+  border: 1px solid #383838;
+  color: white;
+  border-radius: 7px;
+  padding: 15px;
+  text-align: left;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.option:hover {
+  border-color: var(--red);
+}
+
+.option.selected {
+  border-color: var(--red);
+  background: #241012;
+}
+
+.option:disabled {
+  cursor: default;
+  opacity: .8;
+}
+
+.feedback {
+  min-height: 22px;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-top: 15px;
+}
+
+.final-code {
+  font-family: monospace;
+  font-size: 38px;
+  color: var(--red);
+  letter-spacing: 9px;
+  text-align: center;
+  padding: 20px;
+  border: 1px dashed var(--red);
+  background: #10090a;
+  margin: 20px 0;
+}
+
+.footer {
+  text-align: center;
+  color: #555;
+  font-family: monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  margin-top: 35px;
+}
+
+@media(max-width: 420px) {
+  .grid {
+    gap: 6px;
+  }
+
+  .object {
+    min-height: 82px;
+  }
+
+  .emoji {
+    font-size: 25px;
+  }
+
+  .object-name {
+    font-size: 9px;
+  }
 }
 </style>
 </head>
+
 <body>
 <div class="container">
 
   <div class="top">
     <span>UNKNOWN SOURCE</span>
-    <span>CASE 001 / 2026</span>
+    <span>MESSAGE 001</span>
   </div>
 
+  <!-- INTRO -->
   <section id="intro">
-    <h1>THE<br><span class="red">OBSERVATION</span><br>TEST.</h1>
+
+    <h1>THE OBSERVATION TEST.</h1>
+
     <p class="subtitle">
-      A new investigation has been assigned to you.
-      Your ability to notice details will determine whether
-      you can proceed.
+      Some details are easier to miss than you think.
     </p>
 
     <div class="panel">
-      <h2>INVESTIGATION PROTOCOL</h2>
-      <div class="steps">
-        <div class="step">
-          <span class="num">01</span>
-          <span><b>Study the evidence.</b><br>
-          You will be shown a collection of 12 objects.
-          You have exactly 12 seconds to observe them.</span>
-        </div>
-        <div class="step">
-          <span class="num">02</span>
-          <span><b>Answer the questions.</b><br>
-          The evidence will disappear. Answer seven questions
-          using only what you remember.</span>
-        </div>
-        <div class="step">
-          <span class="num">03</span>
-          <span><b>Unlock the mystery code.</b><br>
-          You must score at least 6 out of 7 to reveal your
-          four-character code.</span>
-        </div>
-        <div class="step">
-          <span class="num">04</span>
-          <span><b>Decode your discovery.</b><br>
-          Use the separate Decoder Sheet to interpret your code.
-          Keep your answer secret.</span>
-        </div>
-        <div class="step">
-          <span class="num">05</span>
-          <span><b>Claim the prize.</b><br>
-          The first participant to present the original code
-          and its correctly decoded message to the campaign
-          organiser wins a prize. You may be in pairs.</span>
-        </div>
-      </div>
-      <p class="small" style="margin-top:22px">
-        IMPORTANT: Do not share your answers or mystery code
-        publicly. Your investigation is not complete until
-        you have decoded the message.
+
+      <div class="label">INVESTIGATION INSTRUCTIONS</div>
+
+      <h2>YOUR FIRST CHALLENGE</h2>
+
+      <p class="instructions">
+        You are about to see a collection of objects.
+        Study them carefully. You will only have
+        <strong>10 seconds</strong> to observe everything.
       </p>
+
+      <div class="rule"></div>
+
+      <p class="instructions">
+        <strong>01 — Observe.</strong><br>
+        Pay attention to the objects, their colours,
+        and where each one is placed.
+      </p>
+
+      <p class="instructions">
+        <strong>02 — Remember.</strong><br>
+        The objects will disappear after 10 seconds.
+        You will then be asked five questions.
+      </p>
+
+      <p class="instructions">
+        <strong>03 — Answer.</strong><br>
+        Answer the questions using only what you remember.
+        You need at least three correct answers to continue.
+      </p>
+
+      <p class="instructions">
+        <strong>04 — Decode.</strong><br>
+        Once you complete the challenge, you will receive
+        a four-character mystery code. Use the separate
+        Decoder Sheet to discover its meaning.
+      </p>
+
+      <div class="rule"></div>
+
+      <p class="instructions">
+        <strong>THE PRIZE:</strong><br>
+        The first person or pair to present the original
+        code and its correctly decoded message to the
+        campaign organiser wins a prize.
+      </p>
+
+      <p class="instructions">
+        You may work alone or with a partner.
+        If you work in a pair, discuss your answers together.
+      </p>
+
+      <p class="instructions">
+        Keep your answers and code secret.
+        Do not share them publicly.
+      </p>
+
     </div>
-    <button onclick="begin()">BEGIN INVESTIGATION</button>
+
+    <button onclick="beginObservation()">
+      BEGIN OBSERVATION
+    </button>
+
   </section>
 
+  <!-- OBSERVATION -->
   <section id="observation" class="hidden">
-    <h1>MEMORISE<br><span class="red">EVERY DETAIL.</span></h1>
-    <p class="subtitle">
-      Observe the objects carefully. The evidence will
-      disappear when the countdown reaches zero.
-    </p>
-    <div class="timer" id="timer">12</div>
-    <div class="scene" id="scene"></div>
-    <p class="small" style="text-align:center">
-      TIME IS LIMITED. PAY ATTENTION.
-    </p>
+
+    <div class="label">OBSERVATION WINDOW</div>
+
+    <div class="panel">
+
+      <h2>STUDY THE OBJECTS.</h2>
+
+      <p class="subtitle">
+        Remember their positions and details.
+      </p>
+
+      <div class="countdown" id="timer">10</div>
+
+      <div class="grid" id="objectGrid">
+
+        <!-- FIXED ARRANGEMENT: ROW 1 -->
+
+        <div class="object">
+          <div class="emoji">🔑</div>
+          <div class="object-name">KEY</div>
+        </div>
+
+        <div class="object">
+          <div class="emoji">📖</div>
+          <div class="object-name">BOOK</div>
+        </div>
+
+        <div class="object">
+          <div class="emoji">🌹</div>
+          <div class="object-name">ROSE</div>
+        </div>
+
+        <div class="object">
+          <div class="emoji">⌚</div>
+          <div class="object-name">WATCH</div>
+        </div>
+
+        <div class="object">
+          <div class="emoji">🧭</div>
+          <div class="object-name">COMPASS</div>
+        </div>
+
+        <!-- FIXED ARRANGEMENT: ROW 2 -->
+
+        <div class="object">
+          <div class="emoji">🕯️</div>
+          <div class="object-name">CANDLE</div>
+        </div>
+
+        <div class="object">
+          <div class="emoji">✉️</div>
+          <div class="object-name">ENVELOPE</div>
+        </div>
+
+        <div class="object">
+          <div class="emoji">🔔</div>
+          <div class="object-name">BELL</div>
+        </div>
+
+        <div class="object">
+          <div class="emoji">🪙</div>
+          <div class="object-name">COIN</div>
+        </div>
+
+        <div class="object">
+          <div class="emoji">🕶️</div>
+          <div class="object-name">SUNGLASSES</div>
+        </div>
+
+      </div>
+
+      <p class="instructions" style="text-align:center;">
+        Look carefully. Time is running out.
+      </p>
+
+    </div>
+
   </section>
 
+  <!-- QUESTIONS -->
   <section id="quiz" class="hidden">
-    <h1>THE<br><span class="red">INTERROGATION.</span></h1>
-    <p class="subtitle">
-      The evidence has been removed. Answer all seven questions.
-      You need at least six correct answers.
-    </p>
-    <div id="questions"></div>
-    <button onclick="submitQuiz()">SUBMIT ANSWERS</button>
-    <p class="small">Your score will determine whether you unlock the file.</p>
+
+    <div class="label">OBSERVATION COMPLETE</div>
+
+    <div class="progress-wrap">
+      <div class="progress" id="progress"></div>
+    </div>
+
+    <div class="panel">
+
+      <div class="question-number" id="questionNumber">
+        QUESTION 01 / 05
+      </div>
+
+      <div class="question" id="questionText"></div>
+
+      <div class="options" id="options"></div>
+
+      <div class="feedback" id="feedback"></div>
+
+      <button id="nextButton" onclick="nextQuestion()" disabled>
+        CONTINUE
+      </button>
+
+    </div>
+
   </section>
 
+  <!-- RESULT -->
   <section id="result" class="hidden">
-    <div class="result" id="resultContent"></div>
+
+    <div class="label">UNKNOWN SOURCE // RESPONSE RECEIVED</div>
+
+    <div class="panel">
+
+      <h1 style="font-size:42px;">INTERESTING.</h1>
+
+      <h2>YOU FOUND WHAT YOU WERE LOOKING FOR.</h2>
+
+      <p class="subtitle">
+        But did you notice what was hiding in plain sight?
+      </p>
+
+      <div class="rule"></div>
+
+      <div class="label">YOUR MYSTERY CODE</div>
+
+      <div class="final-code">9QUD</div>
+
+      <button onclick="copyCode()">
+        COPY MYSTERY CODE
+      </button>
+
+      <p class="feedback" id="copyFeedback"></p>
+
+      <div class="rule"></div>
+
+      <p class="instructions">
+        Your first investigation is complete.
+        Keep your code safe and use the separate
+        Decoder Sheet to uncover its meaning.
+      </p>
+
+    </div>
+
   </section>
+
+  <!-- RETRY -->
+  <section id="retry" class="hidden">
+
+    <div class="panel">
+
+      <div class="label">INVESTIGATION INCOMPLETE</div>
+
+      <h2>NOT QUITE.</h2>
+
+      <p class="subtitle">
+        You need at least three correct answers.
+        Take another look at the objects and try again.
+      </p>
+
+      <button onclick="restartInvestigation()">
+        TRY AGAIN
+      </button>
+
+    </div>
+
+  </section>
+
+  <div class="footer">
+    THE MYSTERY PROJECT · FILE 001
+  </div>
 
 </div>
 
 <script>
-const objects = [
-  {name:"Key", emoji:"🗝️"},
-  {name:"Book", emoji:"📕"},
-  {name:"Candle", emoji:"🕯️"},
-  {name:"Watch", emoji:"⌚"},
-  {name:"Rose", emoji:"🌹"},
-  {name:"Compass", emoji:"🧭"},
-  {name:"Envelope", emoji:"✉️"},
-  {name:"Bell", emoji:"🔔"},
-  {name:"Coin", emoji:"🪙"},
-  {name:"Sunglasses", emoji:"🕶️"},
-  {name:"Magnifying Glass", emoji:"🔍"},
-  {name:"Feather", emoji:"🪶"}
+
+const questions = [
+
+  {
+    question: "Which object was in the top-left corner?",
+    options: ["A key", "A book", "A candle", "A compass"],
+    answer: 0
+  },
+
+  {
+    question: "What colour was the rose?",
+    options: ["White", "Yellow", "Red", "Blue"],
+    answer: 2
+  },
+
+  {
+    question: "Which object was directly BELOW the rose?",
+    options: ["A coin", "A bell", "An envelope", "A candle"],
+    answer: 1
+  },
+
+  {
+    question: "Which object could be used to tell the time?",
+    options: ["A compass", "A bell", "A watch", "A key"],
+    answer: 2
+  },
+
+  {
+    question: "How many objects were displayed?",
+    options: ["8", "9", "10", "12"],
+    answer: 2
+  }
+
 ];
 
-let arrangement = [];
-let questions = [];
-let answers = {};
-let countdown;
-let seconds = 12;
+let currentQuestion = 0;
+let selectedAnswer = null;
+let score = 0;
+let timerInterval = null;
 
-function shuffle(array) {
-  const a = [...array];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
+function showSection(id) {
+  ["intro", "observation", "quiz", "result", "retry"]
+    .forEach(section => {
+      document.getElementById(section).classList.add("hidden");
+    });
 
-function show(id) {
-  ["intro","observation","quiz","result"].forEach(x =>
-    document.getElementById(x).classList.add("hidden")
-  );
   document.getElementById(id).classList.remove("hidden");
 }
 
-function begin() {
-  arrangement = shuffle(objects);
-  answers = {};
-  seconds = 12;
+function beginObservation() {
 
-  const scene = document.getElementById("scene");
-  scene.innerHTML = "";
+  showSection("observation");
 
-  arrangement.forEach(obj => {
-    const card = document.createElement("div");
-    card.className = "object";
-    card.innerHTML =
-      `<span class="emoji">${obj.emoji}</span>
-       <span class="name">${obj.name}</span>`;
-    scene.appendChild(card);
-  });
-
+  let seconds = 10;
   document.getElementById("timer").textContent = seconds;
-  show("observation");
 
-  clearInterval(countdown);
-  countdown = setInterval(() => {
+  clearInterval(timerInterval);
+
+  timerInterval = setInterval(() => {
+
     seconds--;
+
     document.getElementById("timer").textContent = seconds;
+
     if (seconds <= 0) {
-      clearInterval(countdown);
-      createQuestions();
-      show("quiz");
+
+      clearInterval(timerInterval);
+
+      showSection("quiz");
+
+      currentQuestion = 0;
+      score = 0;
+
+      displayQuestion();
+
     }
+
   }, 1000);
+
 }
 
-function makeQuestion(text, correct, choices) {
-  const options = shuffle([correct, ...choices.filter(x => x !== correct).slice(0,3)]);
-  return {text, correct, options};
-}
+function displayQuestion() {
 
-function createQuestions() {
-  const grid = arrangement;
-  const at = (r,c) => grid[r*4+c];
+  selectedAnswer = null;
 
-  const questionsData = [];
+  const q = questions[currentQuestion];
 
-  // 1. Top-left position
-  questionsData.push(makeQuestion(
-    "Which object was located in the top-left corner?",
-    at(0,0).name,
-    grid.map(x => x.name)
-  ));
+  document.getElementById("questionNumber").textContent =
+    "QUESTION 0" + (currentQuestion + 1) + " / 05";
 
-  // 2. Object immediately to the right of the compass
-  const compassIndex = grid.findIndex(x => x.name === "Compass");
-  const compassRow = Math.floor(compassIndex / 4);
-  const compassCol = compassIndex % 4;
-  const neighbourCol = compassCol === 3 ? compassCol - 1 : compassCol + 1;
-  const neighbour = at(compassRow, neighbourCol);
+  document.getElementById("questionText").textContent =
+    q.question;
 
-  questionsData.push(makeQuestion(
-    compassCol === 3
-      ? "Which object was immediately to the left of the compass?"
-      : "Which object was immediately to the right of the compass?",
-    neighbour.name,
-    grid.map(x => x.name)
-  ));
+  document.getElementById("progress").style.width =
+    (currentQuestion / questions.length * 100) + "%";
 
-  // 3. Row containing the key
-  const keyIndex = grid.findIndex(x => x.name === "Key");
-  const keyRow = ["Top row","Middle row","Bottom row"][Math.floor(keyIndex/4)];
+  document.getElementById("feedback").textContent = "";
 
-  questionsData.push(makeQuestion(
-    "In which row was the key located?",
-    keyRow,
-    ["Top row","Middle row","Bottom row"]
-  ));
+  const optionsContainer = document.getElementById("options");
 
-  // 4. Position of the rose
-  const roseIndex = grid.findIndex(x => x.name === "Rose");
-  const roseRow = Math.floor(roseIndex/4);
-  const roseCol = roseIndex%4;
-  const rosePosition = [
-    "First column","Second column","Third column","Fourth column"
-  ][roseCol];
+  optionsContainer.innerHTML = "";
 
-  questionsData.push(makeQuestion(
-    "In which column was the rose located?",
-    rosePosition,
-    ["First column","Second column","Third column","Fourth column"]
-  ));
+  q.options.forEach((option, index) => {
 
-  // 5. Object above or below the rose
-  const verticalIndex = roseRow === 2
-    ? roseIndex - 4
-    : roseIndex + 4;
-  const verticalObject = grid[verticalIndex];
+    const button = document.createElement("button");
 
-  questionsData.push(makeQuestion(
-    roseRow === 2
-      ? "Which object was directly above the rose?"
-      : "Which object was directly below the rose?",
-    verticalObject.name,
-    grid.map(x => x.name)
-  ));
+    button.className = "option";
+    button.textContent = option;
 
-  // 6. Object in the middle row, third position
-  questionsData.push(makeQuestion(
-    "Which object occupied the third position from the left in the middle row?",
-    at(1,2).name,
-    grid.map(x => x.name)
-  ));
+    button.onclick = () => selectOption(index, button);
 
-  // 7. Object in bottom-right corner
-  questionsData.push(makeQuestion(
-    "Which object was in the bottom-right corner?",
-    at(2,3).name,
-    grid.map(x => x.name)
-  ));
+    optionsContainer.appendChild(button);
 
-  questions = questionsData;
-  renderQuestions();
-}
-
-function renderQuestions() {
-  const container = document.getElementById("questions");
-  container.innerHTML = "";
-
-  questions.forEach((q,i) => {
-    const section = document.createElement("div");
-    section.className = "question";
-
-    const heading = document.createElement("h3");
-    heading.textContent = `${String(i+1).padStart(2,"0")} — ${q.text}`;
-    section.appendChild(heading);
-
-    const options = document.createElement("div");
-    options.className = "options";
-
-    q.options.forEach(option => {
-      const button = document.createElement("div");
-      button.className = "option";
-      button.textContent = option;
-      button.onclick = () => {
-        answers[i] = option;
-        options.querySelectorAll(".option").forEach(x =>
-          x.classList.remove("selected")
-        );
-        button.classList.add("selected");
-      };
-      options.appendChild(button);
-    });
-
-    section.appendChild(options);
-    container.appendChild(section);
-  });
-}
-
-function submitQuiz() {
-  if (Object.keys(answers).length !== 7) {
-    alert("Please answer all seven questions before submitting.");
-    return;
-  }
-
-  let score = 0;
-  questions.forEach((q,i) => {
-    if (answers[i] === q.correct) score++;
   });
 
-  const result = document.getElementById("resultContent");
+  const nextButton = document.getElementById("nextButton");
 
-  if (score >= 6) {
-    result.innerHTML = `
-      <p class="red" style="letter-spacing:3px;font-family:monospace">
-        FILE ACCESS GRANTED
-        YOU KNOW MORE THAN YOU THINK
-      </p>
-      <h1>WELL<br>OBSERVED.</h1>
-      <div class="score">${score}/7</div>
-      <p class="subtitle">
-        You have successfully completed the observation test.
-        Your next task is to decode the mystery code.
-      </p>
-      <div class="code" id="mysteryCode">9QUD</div>
-      <button onclick="copyCode()">COPY MYSTERY CODE</button>
-      <p class="small">
-        Keep this code private. Use the separate Decoder Sheet.
-        Your investigation is not over.
-      </p>
-      <p class="small">CASE 001 — STATUS: CLEARED</p>
-    `;
+  nextButton.disabled = true;
+  nextButton.textContent =
+    currentQuestion === questions.length - 1
+      ? "FINISH INVESTIGATION"
+      : "NEXT QUESTION";
+
+}
+
+function selectOption(index, button) {
+
+  if (selectedAnswer !== null) return;
+
+  selectedAnswer = index;
+
+  document.querySelectorAll(".option").forEach(option => {
+    option.classList.remove("selected");
+    option.disabled = true;
+  });
+
+  button.classList.add("selected");
+
+  if (index === questions[currentQuestion].answer) {
+
+    score++;
+
+    document.getElementById("feedback").style.color = "#83d69b";
+    document.getElementById("feedback").textContent =
+      "Answer recorded.";
+
   } else {
-    result.innerHTML = `
-      <p class="red" style="letter-spacing:3px;font-family:monospace">
-        ACCESS DENIED
-      </p>
-      <h1>NOT<br>QUITE.</h1>
-      <div class="score">${score}/7</div>
-      <p class="subtitle">
-        You did not reach the required score of 6/7.
-        The evidence will be rearranged. Try again.
-      </p>
-      <button onclick="begin()">RESTART INVESTIGATION</button>
-      <p class="small">A new arrangement will be generated.</p>
-    `;
+
+    document.getElementById("feedback").style.color = "#ff7070";
+    document.getElementById("feedback").textContent =
+      "Answer recorded. Continue to the next question.";
+
   }
 
-  show("result");
+  document.getElementById("nextButton").disabled = false;
+
+}
+
+function nextQuestion() {
+
+  if (selectedAnswer === null) return;
+
+  currentQuestion++;
+
+  if (currentQuestion < questions.length) {
+
+    displayQuestion();
+
+  } else {
+
+    document.getElementById("progress").style.width = "100%";
+
+    if (score >= 3) {
+      showSection("result");
+    } else {
+      showSection("retry");
+    }
+
+  }
+
+}
+
+function restartInvestigation() {
+
+  currentQuestion = 0;
+  score = 0;
+  selectedAnswer = null;
+
+  beginObservation();
+
 }
 
 function copyCode() {
+
   const code = "9QUD";
+
   if (navigator.clipboard && window.isSecureContext) {
-    navigator.clipboard.writeText(code).then(() => {
-      alert("Mystery code copied.");
-    }).catch(() => {
-      alert("Your code is 9QUD. Write it down carefully.");
-    });
+
+    navigator.clipboard.writeText(code)
+      .then(() => {
+        document.getElementById("copyFeedback").textContent =
+          "CODE COPIED. Keep it safe.";
+      })
+      .catch(() => {
+        document.getElementById("copyFeedback").textContent =
+          "Your code is 9QUD. Write it down carefully.";
+      });
+
   } else {
-    alert("Your mystery code is 9QUD. Write it down carefully.");
+
+    document.getElementById("copyFeedback").textContent =
+      "Your code is 9QUD. Write it down carefully.";
+
   }
+
 }
+
 </script>
+
 </body>
 </html>
