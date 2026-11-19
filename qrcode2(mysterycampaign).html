@@ -4,601 +4,598 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CASE 002 — THE FOUR CLUES</title>
+<title>The Art of Noticing</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 :root {
-  --red: #B51220;
-  --bg: #080808;
-  --card: #151515;
-  --text: #f5f5f5;
-  --muted: #999;
+  --black: #10100f;
+  --cream: #eeeae1;
+  --muted: #aaa69d;
+  --red: #b51220;
+  --line: rgba(238,234,225,.19);
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  min-height: 100vh;
-  background:
-    radial-gradient(circle at top, #241012 0%, #080808 48%);
-  color: var(--text);
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  padding: 25px 15px;
+  background: var(--black);
+  color: var(--cream);
+  font-family: 'DM Sans', sans-serif;
 }
 
-.container {
-  width: 100%;
-  max-width: 650px;
-}
-
-.top {
+.topbar {
+  height: 58px;
+  padding: 0 6%;
   display: flex;
   justify-content: space-between;
-  gap: 10px;
-  color: var(--red);
-  font-family: monospace;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--muted);
+}
+
+.brand {
+  color: var(--cream);
+  font-weight: 500;
+}
+
+.brand span { color: var(--red); }
+
+.hero {
+  min-height: 690px;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: 8% 8%;
+  overflow: hidden;
+  background:
+    linear-gradient(0deg, rgba(10,10,9,.95) 0%, rgba(10,10,9,.25) 65%, rgba(10,10,9,.1) 100%),
+    linear-gradient(90deg, rgba(10,10,9,.65), transparent),
+    url('https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=2000&q=90') center 48% / cover;
+}
+
+.hero-content {
+  position: relative;
+  max-width: 850px;
+}
+
+.eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: #e2b2a9;
+  margin-bottom: 22px;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(64px, 10vw, 125px);
+  line-height: .91;
+  font-weight: 600;
+  letter-spacing: -5px;
+  margin: 0;
+}
+
+.hero h1 em {
+  color: #d2a49b;
+  font-weight: 500;
+}
+
+.hero-description {
+  max-width: 440px;
+  margin-top: 30px;
+  color: #d1cec7;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.hero-bottom {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 42px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--muted);
+}
+
+.red-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--red);
+  border-radius: 50%;
+}
+
+.intro {
+  padding: 100px 9%;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 10%;
+  border-bottom: 1px solid var(--line);
+}
+
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: #d28a82;
+}
+
+.intro h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(36px, 5vw, 60px);
+  line-height: 1.08;
+  font-weight: 500;
+  margin: 24px 0;
+}
+
+.intro p {
+  color: #bcb8af;
+  font-size: 16px;
+  line-height: 1.9;
+  margin: 0;
+}
+
+.intro-quote {
+  border-left: 2px solid var(--red);
+  padding: 10px 0 10px 28px;
+  align-self: center;
+}
+
+.intro-quote p {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(24px, 3vw, 37px);
+  line-height: 1.35;
+  color: var(--cream);
+}
+
+.intro-quote small {
+  display: block;
+  margin-top: 22px;
+  color: var(--muted);
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+.story {
+  padding: 105px 8%;
+}
+
+.story-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  margin-bottom: 55px;
+  gap: 20px;
+}
+
+.story-heading h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(42px, 6vw, 70px);
+  font-weight: 500;
+  margin: 16px 0 0;
+}
+
+.story-heading p {
+  max-width: 250px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.feature {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 7%;
+  align-items: center;
+  margin: 0 0 110px;
+}
+
+.feature.reverse {
+  grid-template-columns: .9fr 1.1fr;
+}
+
+.feature.reverse .photo { order: 2; }
+.feature.reverse .feature-text { order: 1; }
+
+.photo {
+  position: relative;
+  min-height: 390px;
+  overflow: hidden;
+  background: #262522;
+}
+
+.photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 390px;
+  object-fit: cover;
+  transition: transform .8s ease;
+}
+
+.photo:hover img { transform: scale(1.045); }
+
+.photo-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 35px 20px 17px;
+  background: linear-gradient(transparent, rgba(0,0,0,.75));
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: white;
+}
+
+.number {
+  color: #d28a82;
+  font-family: 'DM Mono', monospace;
   font-size: 11px;
   letter-spacing: 2px;
-  border-bottom: 1px solid #333;
-  padding-bottom: 15px;
 }
 
-h1 {
-  font-size: clamp(35px, 8vw, 58px);
-  line-height: 1.05;
-  margin: 35px 0 12px;
-  letter-spacing: 1px;
+.feature-text h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  font-size: clamp(34px, 4vw, 51px);
+  line-height: 1.12;
+  margin: 20px 0;
 }
 
-h2 {
-  font-size: 23px;
-  line-height: 1.3;
-}
-
-.red {
-  color: var(--red);
-}
-
-.subtitle {
-  color: #aaa;
-  line-height: 1.7;
+.feature-text p {
+  color: #bcb8af;
+  line-height: 1.9;
   font-size: 15px;
 }
 
-.panel {
-  background: rgba(21,21,21,.96);
-  border: 1px solid #333;
-  border-radius: 12px;
-  padding: 25px;
-  margin-top: 25px;
-}
-
-.label {
-  color: var(--red);
-  font-family: monospace;
-  font-size: 11px;
-  letter-spacing: 2px;
-  margin-bottom: 12px;
-}
-
-.instructions {
-  line-height: 1.8;
-  color: #ccc;
-  font-size: 14px;
-}
-
-.instructions strong {
-  color: white;
-}
-
-.rule {
-  border-top: 1px solid #333;
-  margin: 20px 0;
-}
-
-button {
-  background: var(--red);
-  color: white;
-  border: none;
-  padding: 15px 22px;
-  border-radius: 6px;
-  font-weight: bold;
-  letter-spacing: 1px;
-  cursor: pointer;
-  width: 100%;
-  margin-top: 15px;
-  font-size: 14px;
-}
-
-button:hover {
-  background: #d01929;
-}
-
-button.secondary {
-  background: #252525;
-  border: 1px solid #444;
-}
-
-input {
-  width: 100%;
-  padding: 15px;
-  margin-top: 15px;
-  background: #080808;
-  border: 1px solid #444;
-  color: white;
-  border-radius: 6px;
-  font-size: 18px;
-  outline: none;
-}
-
-input:focus {
-  border-color: var(--red);
-}
-
-.progress-wrap {
-  background: #292929;
-  height: 5px;
-  border-radius: 10px;
-  margin: 15px 0 25px;
-  overflow: hidden;
-}
-
-.progress {
-  background: var(--red);
-  height: 100%;
-  width: 0%;
-  transition: width .3s;
-}
-
-.clue-number {
-  color: var(--red);
-  font-family: monospace;
-  font-size: 12px;
-  letter-spacing: 2px;
-}
-
-.question {
-  font-size: 19px;
-  line-height: 1.6;
-  margin: 18px 0;
-}
-
-.visual {
-  background: #090909;
-  border: 1px solid #333;
-  border-radius: 8px;
-  padding: 22px 12px;
-  text-align: center;
-  font-size: 28px;
-  letter-spacing: 5px;
-  margin: 20px 0;
-  line-height: 1.8;
-}
-
-.feedback {
-  margin-top: 15px;
-  font-size: 14px;
-  line-height: 1.6;
-  min-height: 20px;
-}
-
-.hint {
-  color: #aaa;
+.fact {
+  margin-top: 28px;
+  padding: 19px 20px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  color: #e2b2a9;
   font-size: 13px;
-  line-height: 1.6;
-  margin-top: 15px;
+  line-height: 1.7;
 }
 
-.hidden {
-  display: none;
+.fact strong {
+  display: block;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+  color: var(--muted);
 }
 
-.final-code {
-  font-family: monospace;
-  color: var(--red);
-  font-size: 38px;
-  letter-spacing: 9px;
+.big-break {
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  padding: 20px;
-  border: 1px dashed var(--red);
-  margin: 20px 0;
-  background: #10090a;
+  padding: 80px 10%;
+  background:
+    linear-gradient(rgba(10,10,9,.65), rgba(10,10,9,.8)),
+    url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1800&q=85') center / cover;
+}
+
+.big-break blockquote {
+  max-width: 900px;
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(35px, 6vw, 72px);
+  line-height: 1.2;
+}
+
+.big-break blockquote span { color: #d2a49b; }
+
+.more {
+  padding: 100px 8%;
+  background: #171715;
+}
+
+.more-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(40px, 6vw, 65px);
+  font-weight: 500;
+  margin: 18px 0 50px;
+}
+
+.mini-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.mini-card {
+  border-top: 1px solid var(--line);
+  padding-top: 25px;
+}
+
+.mini-card img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.mini-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 25px;
+  font-weight: 500;
+  margin: 0 0 12px;
+}
+
+.mini-card p {
+  color: #aaa69d;
+  font-size: 13px;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.closing {
+  padding: 110px 9%;
+  text-align: center;
+}
+
+.closing .small {
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 3px;
+  color: #d28a82;
+  font-size: 10px;
+}
+
+.closing h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(44px, 7vw, 82px);
+  font-weight: 500;
+  line-height: 1.08;
+  max-width: 850px;
+  margin: 28px auto;
+}
+
+.closing p {
+  max-width: 500px;
+  margin: 0 auto;
+  color: var(--muted);
+  line-height: 1.9;
 }
 
 .footer {
-  text-align: center;
-  color: #555;
-  font-family: monospace;
-  font-size: 10px;
+  border-top: 1px solid var(--line);
+  padding: 25px 7%;
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
   letter-spacing: 2px;
-  margin-top: 35px;
+}
+
+@media(max-width:750px) {
+  .hero { min-height: 620px; padding: 12% 7%; }
+  .hero h1 { letter-spacing: -3px; }
+  .intro { grid-template-columns: 1fr; padding: 75px 8%; gap: 45px; }
+  .story { padding: 75px 7%; }
+  .story-heading { display: block; }
+  .feature, .feature.reverse { grid-template-columns: 1fr; gap: 30px; margin-bottom: 80px; }
+  .feature.reverse .photo, .feature.reverse .feature-text { order: initial; }
+  .photo, .photo img { min-height: 280px; }
+  .mini-grid { grid-template-columns: 1fr; gap: 45px; }
+  .mini-card img { height: 230px; }
+  .big-break { min-height: 400px; }
+  .footer { gap: 15px; flex-wrap: wrap; }
 }
 </style>
 </head>
 
 <body>
-<div class="container">
 
-  <div class="top">
-    <span>UNKNOWN SOURCE</span>
-    <span>MESSAGE 002</span>
-  </div>
+<header class="topbar">
+  <div class="brand">FIELD NOTES<span>.</span></div>
+  <div>AN EXPLORATION OF THE HUMAN MIND</div>
+  <div>NO. 002</div>
+</header>
 
-  <!-- INTRODUCTION -->
-  <section id="intro">
-
-    <h1>YOU KNOW MORE<br>THAN YOU THINK.</h1>
-
-    <p class="subtitle">
-      But did you notice what was hiding in plain sight?
+<section class="hero">
+  <div class="hero-content">
+    <div class="eyebrow">A STUDY IN PERCEPTION &nbsp; / &nbsp; 2026</div>
+    <h1>THE ART<br>OF <em>NOTICING</em></h1>
+    <p class="hero-description">
+      The world is full of extraordinary things.
+      Some are right in front of us. Yet our minds
+      don't always give them a second look.
     </p>
-
-    <div class="panel">
-      <div class="label">BEFORE YOU BEGIN</div>
-
-      <h2>THE FOUR CLUES</h2>
-
-      <p class="instructions">
-        This investigation contains four challenges.
-        Each answer will reveal one number.
-        Put the four numbers together to discover
-        your secret combination.
-      </p>
-
-      <div class="rule"></div>
-
-      <p class="instructions">
-        <strong>01 — Work together.</strong><br>
-        You may solve this investigation alone or with a partner.
-        If you are in a pair, discuss each clue and agree on your answers.
-      </p>
-
-      <p class="instructions">
-        <strong>02 — Follow the clues.</strong><br>
-        Read each question carefully. You can request a hint if you need one.
-      </p>
-
-      <p class="instructions">
-        <strong>03 — Find the combination.</strong><br>
-        Every correct answer gives you one digit.
-        Keep the digits in the order you discover them.
-      </p>
-
-      <p class="instructions">
-        <strong>04 — Decode the mystery.</strong><br>
-        When you finish, write down your secret code.
-        Use the separate Decoder Sheet to work out what it means.
-      </p>
-
-      <div class="rule"></div>
-
-      <p class="instructions">
-        <strong>THE CHALLENGE:</strong><br>
-        The first individual or pair to present the correct
-        original code AND its correctly decoded message
-        to the campaign organiser wins a prize.
-      </p>
-
-      <p class="hint">
-        Keep your answers and decoded message secret.
-        Do not post them publicly.
-      </p>
+    <div class="hero-bottom">
+      <span class="red-dot"></span>
+      <span>TAKE A CLOSER LOOK</span>
+      <span>—</span>
+      <span>5 MIN READ</span>
     </div>
+  </div>
+</section>
 
-    <button onclick="startInvestigation()">
-      BEGIN INVESTIGATION
-    </button>
-
-  </section>
-
-  <!-- CHALLENGE -->
-  <section id="challenge" class="hidden">
-
-    <div class="label">INVESTIGATION IN PROGRESS</div>
-
-    <div class="progress-wrap">
-      <div class="progress" id="progress"></div>
-    </div>
-
-    <div class="panel">
-
-      <div class="clue-number" id="clueNumber">
-        CLUE 01 / 04
-      </div>
-
-      <h2 id="clueTitle"></h2>
-
-      <div class="question" id="question"></div>
-
-      <div class="visual" id="visual"></div>
-
-      <p class="hint" id="extra"></p>
-
-      <input
-        id="answer"
-        type="text"
-        placeholder="Enter your answer..."
-        autocomplete="off"
-      >
-
-      <button onclick="checkAnswer()">
-        SUBMIT ANSWER
-      </button>
-
-      <button class="secondary" onclick="showHint()">
-        REVEAL A HINT
-      </button>
-
-      <div class="feedback" id="feedback"></div>
-
-    </div>
-
-  </section>
-
-  <!-- COMPLETION -->
-  <section id="ending" class="hidden">
-
-    <div class="label">UNKNOWN SOURCE // RESPONSE RECEIVED</div>
-
-    <div class="panel">
-
-      <h1 style="font-size:42px;">INTERESTING.</h1>
-
-      <h2>YOU FOUND WHAT YOU WERE LOOKING FOR.</h2>
-
-      <p class="subtitle">
-        But did you notice what was hiding in plain sight?
-      </p>
-
-      <div class="rule"></div>
-
-      <div class="label">YOUR SECRET CODE</div>
-
-      <div class="final-code" id="finalCode">4LKM</div>
-
-      <button onclick="copyCode()">
-        COPY SECRET CODE
-      </button>
-
-      <p class="hint" id="copyFeedback"></p>
-
-      <div class="rule"></div>
-
-      <p class="instructions">
-        Your investigation is complete.
-        Take your code and the separate Decoder Sheet
-        to uncover the next part of the mystery.
-      </p>
-
-    </div>
-
-  </section>
-
-  <div class="footer">
-    THE MYSTERY PROJECT · FILE 002
+<section class="intro">
+  <div>
+    <div class="section-label">01 — THE HUMAN BRAIN</div>
+    <h2>Seeing is not quite the same as noticing.</h2>
+    <p>
+      Your eyes take in an enormous amount of visual
+      information. But your brain has to prioritize what
+      deserves your attention. That means the world you
+      consciously experience is only part of what is
+      happening around you.
+    </p>
   </div>
 
-</div>
+  <div class="intro-quote">
+    <p>“We don't experience everything around us. We experience what our minds select.”</p>
+    <small>A THOUGHT ABOUT PERCEPTION</small>
+  </div>
+</section>
 
-<script>
+<section class="story">
+  <div class="story-heading">
+    <div>
+      <div class="section-label">02 — THINGS YOU MIGHT NOT KNOW</div>
+      <h2>Inside your attention.</h2>
+    </div>
+    <p>Three fascinating ways the human mind makes sense of the world.</p>
+  </div>
 
-const clues = [
+  <article class="feature">
+    <div class="photo">
+      <img src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1200&q=85" alt="A vast night sky filled with stars">
+      <div class="photo-caption">THE NIGHT SKY — AN INFINITE VIEW</div>
+    </div>
 
-  {
-    title: "THE MISSING NUMBER",
-    question:
-      "Look carefully at this number sequence. What number comes next? Enter the FULL number.",
-    visual: "4 &nbsp; 9 &nbsp; 14 &nbsp; 19 &nbsp; ?",
-    hint:
-      "Think about how much is added each time.",
-    answers: ["24"],
-    digit: "4",
-    correct:
-      "Correct. The missing number is 24. The last digit is your first number."
-  },
+    <div class="feature-text">
+      <div class="number">01 / SELECTIVE ATTENTION</div>
+      <h3>Your brain is a very selective editor.</h3>
+      <p>
+        Imagine trying to listen to one friend in a crowded
+        room. There may be dozens of conversations happening
+        around you, but your attention can focus on just one.
+      </p>
+      <p>
+        This ability helps us concentrate. It also means that
+        things can happen right beside us without entering
+        our conscious awareness.
+      </p>
+      <div class="fact">
+        <strong>THE INTERESTING PART</strong>
+        Your attention is limited. Focusing intensely on one
+        thing can make other things easier to miss.
+      </div>
+    </div>
+  </article>
 
-  {
-    title: "THE PATTERN",
-    question:
-      "The pattern continues in the same order. How many circles would appear in the FIRST EIGHT shapes?",
-    visual: "▲ &nbsp; ● &nbsp; ▲ &nbsp; ● &nbsp; ▲ &nbsp; ?",
-    hint:
-      "The triangle and circle take turns. Count the circles in eight positions.",
-    answers: ["4", "four"],
-    digit: "4",
-    correct:
-      "Correct. Four circles. Your second number is 4."
-  },
+  <article class="feature reverse">
+    <div class="photo">
+      <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85" alt="A winding road through a dramatic landscape">
+      <div class="photo-caption">A LANDSCAPE — ONE VIEW, MANY DETAILS</div>
+    </div>
 
-  {
-    title: "THE SHARED CARDS",
-    question:
-      "Three friends share 27 cards equally. One friend then gives 3 of their cards to another friend. How many cards does the friend who gave them away have LEFT?",
-    visual: "27 CARDS &nbsp; / &nbsp; 3 FRIENDS",
-    hint:
-      "First divide 27 equally between the three friends. Then subtract 3.",
-    answers: ["6", "six"],
-    digit: "6",
-    correct:
-      "Correct. Each friend starts with 9 cards. After giving away 3, the friend has 6 left."
-  },
+    <div class="feature-text">
+      <div class="number">02 / CHANGE BLINDNESS</div>
+      <h3>Big changes can go unnoticed.</h3>
+      <p>
+        People can sometimes fail to notice surprisingly
+        large changes in a scene, especially when something
+        interrupts the view between the original scene and
+        the changed one.
+      </p>
+      <p>
+        This phenomenon is known as <em>change blindness</em>.
+        It shows that our visual experience isn't a perfect,
+        uninterrupted recording of everything we see.
+      </p>
+      <div class="fact">
+        <strong>THE INTERESTING PART</strong>
+        Even a noticeable change can escape attention if
+        the right distraction occurs at the right moment.
+      </div>
+    </div>
+  </article>
 
-  {
-    title: "THE MIXED LETTERS",
-    question:
-      "These letters have been mixed up. Rearrange them to discover the name of a number. Enter the number as a digit.",
-    visual: "N &nbsp; E &nbsp; V &nbsp; E &nbsp; S",
-    hint:
-      "The answer is a number between 1 and 10.",
-    answers: ["7", "seven"],
-    digit: "7",
-    correct:
-      "Correct. The letters spell SEVEN. Your final number is 7."
-  }
+  <article class="feature">
+    <div class="photo">
+      <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=85" alt="A mountain beneath a sky full of stars">
+      <div class="photo-caption">PATTERNS IN THE NATURAL WORLD</div>
+    </div>
 
-];
+    <div class="feature-text">
+      <div class="number">03 / PAREIDOLIA</div>
+      <h3>Why do we see faces everywhere?</h3>
+      <p>
+        Have you ever looked at a cloud and seen a face?
+        Or noticed what looks like an expression in the
+        front of a car?
+      </p>
+      <p>
+        This is called <em>pareidolia</em>: the tendency
+        to perceive familiar shapes, especially faces,
+        in random objects and patterns.
+      </p>
+      <div class="fact">
+        <strong>THE INTERESTING PART</strong>
+        Your brain is so good at recognizing faces that
+        sometimes it finds them where no face exists.
+      </div>
+    </div>
+  </article>
+</section>
 
-let current = 0;
-let digits = [];
-let hintUsed = false;
+<section class="big-break">
+  <blockquote>
+    Sometimes the most fascinating thing isn't what you see.
+    <span>It's how you see it.</span>
+  </blockquote>
+</section>
 
-function startInvestigation() {
-  document.getElementById("intro").classList.add("hidden");
-  document.getElementById("challenge").classList.remove("hidden");
-  showClue();
-}
+<section class="more">
+  <div class="section-label">03 — A FEW MORE CURIOSITIES</div>
+  <h2 class="more-title">The mind is full of surprises.</h2>
 
-function showClue() {
+  <div class="mini-grid">
+    <article class="mini-card">
+      <img src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=900&q=85" alt="Sunlight shining through a misty landscape">
+      <h3>Memory isn't a video.</h3>
+      <p>
+        Human memory is reconstructive. Remembering an event
+        involves rebuilding it, and details can change over time.
+      </p>
+    </article>
 
-  hintUsed = false;
+    <article class="mini-card">
+      <img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=900&q=85" alt="A beautiful mountain landscape">
+      <h3>Context changes perception.</h3>
+      <p>
+        The surroundings of an object can influence how we
+        interpret it. The same thing can look different
+        depending on what is around it.
+      </p>
+    </article>
 
-  const clue = clues[current];
+    <article class="mini-card">
+      <img src="https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=900&q=85" alt="Sunlight filtering through a forest">
+      <h3>Quiet has a lot going on.</h3>
+      <p>
+        When the world becomes quieter, sounds that were
+        previously masked can suddenly become noticeable.
+      </p>
+    </article>
+  </div>
+</section>
 
-  document.getElementById("clueNumber").textContent =
-    "CLUE 0" + (current + 1) + " / 04";
+<section class="closing">
+  <div class="small">END OF FIELD NOTE 002</div>
+  <h2>There is always more to discover.</h2>
+  <p>
+    The world hasn't changed. Sometimes, the way we pay
+    attention to it has.
+  </p>
+</section>
 
-  document.getElementById("clueTitle").textContent =
-    clue.title;
-
-  document.getElementById("question").textContent =
-    clue.question;
-
-  document.getElementById("visual").innerHTML =
-    clue.visual;
-
-  document.getElementById("extra").textContent =
-    "Study the clue before answering.";
-
-  document.getElementById("answer").value = "";
-
-  document.getElementById("feedback").textContent = "";
-
-  document.getElementById("progress").style.width =
-    (current / clues.length * 100) + "%";
-
-  document.getElementById("answer").focus();
-}
-
-function checkAnswer() {
-
-  const input = document.getElementById("answer");
-  const value = input.value.trim().toLowerCase();
-
-  const feedback = document.getElementById("feedback");
-
-  if (!value) {
-    feedback.style.color = "#ff7070";
-    feedback.textContent = "Enter an answer before continuing.";
-    return;
-  }
-
-  const clue = clues[current];
-
-  if (clue.answers.includes(value)) {
-
-    digits.push(clue.digit);
-
-    feedback.style.color = "#83d69b";
-    feedback.textContent = clue.correct;
-
-    document.getElementById("progress").style.width =
-      ((current + 1) / clues.length * 100) + "%";
-
-    const button = document.querySelector(
-      "#challenge button"
-    );
-
-    button.textContent =
-      current === clues.length - 1
-      ? "REVEAL THE RESULT"
-      : "NEXT CLUE";
-
-    button.onclick = nextClue;
-
-  } else {
-
-    feedback.style.color = "#ff7070";
-    feedback.textContent =
-      "Not quite. Look at the clue again and try another answer.";
-
-  }
-
-}
-
-function nextClue() {
-
-  current++;
-
-  if (current >= clues.length) {
-    finishInvestigation();
-    return;
-  }
-
-  const button = document.querySelector(
-    "#challenge button"
-  );
-
-  button.textContent = "SUBMIT ANSWER";
-  button.onclick = checkAnswer;
-
-  showClue();
-}
-
-function showHint() {
-
-  if (hintUsed) {
-    document.getElementById("feedback").textContent =
-      "You have already revealed this hint.";
-    return;
-  }
-
-  hintUsed = true;
-
-  document.getElementById("extra").textContent =
-    "HINT: " + clues[current].hint;
-
-}
-
-function finishInvestigation() {
-
-  document.getElementById("challenge").classList.add("hidden");
-  document.getElementById("ending").classList.remove("hidden");
-
-}
-
-function copyCode() {
-
-  const code = "4LKM";
-
-  navigator.clipboard.writeText(code).then(() => {
-
-    document.getElementById("copyFeedback").textContent =
-      "CODE COPIED. Keep it safe.";
-
-  }).catch(() => {
-
-    document.getElementById("copyFeedback").textContent =
-      "Your code is 4LKM. Write it down carefully.";
-
-  });
-
-}
-
-document.getElementById("answer").addEventListener(
-  "keydown",
-  function(event) {
-    if (event.key === "Enter") {
-      checkAnswer();
-    }
-  }
-);
-
-</script>
+<footer class="footer">
+  <span>FIELD NOTES — 2026</span>
+  <span>OBSERVE. WONDER. DISCOVER.</span>
+  <span>02 / 04</span>
+</footer>
 
 </body>
 </html>
+
